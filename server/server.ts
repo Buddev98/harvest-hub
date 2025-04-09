@@ -9,6 +9,7 @@ import userRouter from './routes/userRouter';
 import authRouter from './routes/authRouter';
 import logger from './logger';
 import productRouter from './routes/productRouter';
+import bookingRouter from './routes/bookingRouter';
 
 
 dotenv.config();
@@ -32,5 +33,6 @@ logger.info('MongoDB connected successfully');
 app.use(authRouter);
 app.use(userRouter);
 app.use(productRouter);
+app.use(bookingRouter)
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
