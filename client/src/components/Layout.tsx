@@ -22,9 +22,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       { to: "/myappointments", label: "A", tooltip: "My Appointments" },
     ],
     farmer: [
+      { to: "/addproduct", label: "A", tooltip: "Added Products" },
+      { to: "/FarmerDashboard", label: "D", tooltip: "Dashboard" },
       { to: "/profile", label: "P", tooltip: "Update Profile" },
-      { to: "/appointmentapproval", label: "A", tooltip: "Appointment  Approval" },
-      
     ],
   };
   

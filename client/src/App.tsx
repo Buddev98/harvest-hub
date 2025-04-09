@@ -7,6 +7,8 @@ import Dashboard from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Register";
 import UserDetails from "./components/UserProfile";
+import AddProduct from "./pages/AddProduct";
+import FarmerDashboard from "./pages/Farmerdashboard";
 
 function App() {
   interface RouteConfig {
@@ -20,7 +22,9 @@ function App() {
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard />, role: "farmer" },
     { path: "/profile", element: <UserDetails/>, role: "farmer" },
-    { path: "/my-profile", element: <UserDetails/>, role: "buyer" }
+    { path: "/my-profile", element: <UserDetails/>, role: "buyer" },
+    { path: "/addproduct", element: <AddProduct/>, role: "farmer" },
+    { path: "/FarmerDashboard", element: <FarmerDashboard/>, role: "farmer" }
   ];
 
   return (
