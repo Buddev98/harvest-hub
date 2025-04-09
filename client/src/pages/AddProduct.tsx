@@ -22,7 +22,7 @@ console.log("santhu",form)
  
   return (
 
-    <form onSubmit={handleSubmit} className="p-4 border rounded bg-blue-500 shadow-md max-w-lg mx-auto">
+    <form onSubmit={handleSubmit} className="p-4 border rounded bg-white shadow-md max-w-lg mx-auto">
       <h2 className="text-xl font-bold mb-4">Add Product</h2>
       
       <label className="block mb-2">
