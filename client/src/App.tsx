@@ -6,13 +6,10 @@ import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Register";
-import BookDoctorAppoint from "./pages/BookDoctorAppoint"
-import MyAppointments from "./pages/MyAppointments"
-import Appointments from "./pages/Appointments"
-import MedicalRecordForm from "./pages/MedicalRecord";
-import AllPatientList from "./pages/AllPatientsList"
+import UserDetails from "./components/UserProfile";
 import AddProduct from "./pages/AddProduct";
 import FarmerDashboard from "./pages/Farmerdashboard";
+
 function App() {
   interface RouteConfig {
     path: string;
@@ -24,12 +21,8 @@ function App() {
     { path: "/", element: <LoginForm /> },
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard />, role: "farmer" },
-    {path:"/book", element:<BookDoctorAppoint/>, role: "buyer"},
-    { path: "/myappointments", element: <MyAppointments />, role: "buyer" },
-    { path: "/appointlist", element: <Appointments />, role: "farmer" },
-    { path: "/appointmentapproval", element: <Appointments />, role: "farmer" },
-    { path: "/medical/:id", element: <MedicalRecordForm/>, role: "farmer" },
-    { path: "/allPatient", element: <AllPatientList/>, role: "farmer" },
+    { path: "/profile", element: <UserDetails/>, role: "farmer" },
+    { path: "/my-profile", element: <UserDetails/>, role: "buyer" },
     { path: "/addproduct", element: <AddProduct/>, role: "farmer" },
     { path: "/FarmerDashboard", element: <FarmerDashboard/>, role: "farmer" }
   ];

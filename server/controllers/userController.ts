@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import userModel from "../models/userModel";
+import { JwtPayload } from "jsonwebtoken";
 
 const UserController = {
-  getUsers: async (req: Request, res: Response) => {
+  getUserDetails: async (req: Request, res: Response) => {
     try {
-      const users = await userModel.find();
-      res.status(200).json(users);
+      const usercheck = req.user as JwtPayload;
+      const userId:string = usercheck.id;
+      const user = await userModel.findById(userId);
+      res.status(200).json({ username: user?.username, email: user?.email, phone: user?.phone});
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }
@@ -21,10 +24,12 @@ const UserController = {
 
   updateUser: async (req: Request, res: Response) => {
     try {
-      const user = await userModel.findByIdAndUpdate(req.params.id, req.body, {
+      const usercheck = req.user as JwtPayload;
+      const userId:string = usercheck.id;
+      const user = await userModel.findByIdAndUpdate(userId, req.body, {
         new: true,
       });
-      res.status(200).json(user);
+      res.status(200).json({ username: user?.username, email: user?.email, phone: user?.phone });
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }
@@ -32,8 +37,10 @@ const UserController = {
 
   deleteUser: async (req: Request, res: Response) => {
     try { 
-      await userModel.findByIdAndDelete(req.params.id);
-      res.status(200).json("User deleted");
+      const usercheck = req.user as JwtPayload;
+      const userId:string = usercheck.id;
+      await userModel.findByIdAndDelete(userId);
+      res.status(200).json({ message: "user details deleted" });
     } catch (error) {
       res.status(500).json({ error: (error as Error).message });
     }
@@ -42,5 +49,5 @@ const UserController = {
 };
 
 
-export const { getUsers, updateUser, deleteUser,getpatients } = UserController;
+export const { updateUser, deleteUser, getUserDetails } = UserController;
 export default UserController;

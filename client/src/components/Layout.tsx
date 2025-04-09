@@ -19,14 +19,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   const links: Record<Role, { to: string; label: string; tooltip: string }[]> = {
     buyer: [
-      
       { to: "/myappointments", label: "A", tooltip: "My Appointments" },
-    
     ],
     farmer: [
       { to: "/addproduct", label: "A", tooltip: "Added Products" },
       { to: "/FarmerDashboard", label: "D", tooltip: "Dashboard" },
-      
+      { to: "/profile", label: "P", tooltip: "Update Profile" },
     ],
   };
   
