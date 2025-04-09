@@ -11,6 +11,8 @@ import MyAppointments from "./pages/MyAppointments"
 import Appointments from "./pages/Appointments"
 import MedicalRecordForm from "./pages/MedicalRecord";
 import AllPatientList from "./pages/AllPatientsList"
+import AddProduct from "./pages/AddProduct";
+import FarmerDashboard from "./pages/Farmerdashboard";
 function App() {
   interface RouteConfig {
     path: string;
@@ -27,8 +29,9 @@ function App() {
     { path: "/appointlist", element: <Appointments />, role: "farmer" },
     { path: "/appointmentapproval", element: <Appointments />, role: "farmer" },
     { path: "/medical/:id", element: <MedicalRecordForm/>, role: "farmer" },
-    { path: "/allPatient", element: <AllPatientList/>, role: "farmer" }
-
+    { path: "/allPatient", element: <AllPatientList/>, role: "farmer" },
+    { path: "/addproduct", element: <AddProduct/>, role: "farmer" },
+    { path: "/FarmerDashboard", element: <FarmerDashboard/>, role: "farmer" }
   ];
 
   return (

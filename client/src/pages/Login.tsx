@@ -59,7 +59,7 @@ const LoginForm: React.FC = () => {
       if(response.data.role == "buyer"){
         navigate("/products");
       }else{
-        navigate("/dashboard");
+        navigate("/FarmerDashboard");
       }
      
     } catch (error: unknown) {
