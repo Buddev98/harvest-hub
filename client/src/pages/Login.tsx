@@ -20,11 +20,13 @@ const LoginForm: React.FC = () => {
     placeholder?: string;
     validation: (value: string) => string | null;
     options?: string[];
+    value: string;
   }[] = [
     {
       name: "username",
       label: "Username",
       type: "text",
+      value: '',
       placeholder: "Enter your username",
       validation: (value: string) =>
         value.trim().length === 0 ? "Username is required." : null,
@@ -33,6 +35,7 @@ const LoginForm: React.FC = () => {
       name: "password",
       label: "Password",
       type: "password",
+      value: '',
       placeholder: "Enter your password",
       validation: (value: string) =>
         value.trim() === ""
@@ -44,7 +47,7 @@ const LoginForm: React.FC = () => {
   ];
 
   useEffect(() => {
-    document.title = "Harvest Hub - Login";
+    document.title = "Harvest Hub";
     setTimeout(() => {
       setLoading(false);
     }, 500);
@@ -57,7 +60,7 @@ const LoginForm: React.FC = () => {
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch(login(response.data));
       if(response.data.role == "buyer"){
-        navigate("/products");
+        navigate("/addbookings");
       }else{
         navigate("/dashboard");
       }
