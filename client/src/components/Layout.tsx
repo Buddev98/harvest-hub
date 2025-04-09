@@ -15,15 +15,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const { pathname } = location;
-  type Role = "patient" | "admin";
+  type Role = "buyer" | "farmer";
 
   const links: Record<Role, { to: string; label: string; tooltip: string }[]> = {
-    patient: [
+    buyer: [
       
       { to: "/myappointments", label: "A", tooltip: "My Appointments" },
     
     ],
-    admin: [
+    farmer: [
       { to: "/allPatient", label: "P", tooltip: "Patient List" },
       { to: "/appointmentapproval", label: "A", tooltip: "Appointment  Approval" },
       
@@ -56,9 +56,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <header className="sticky bg-gradient-to-r from-purple-700 to-purple-400 text-white p-2 flex flex-col md:flex-row justify-between items-center top-0 left-0 fixed  w-full shadow-md z-50">
+      <header className="sticky bg-gradient-to-r from-green-700 to-green-400 text-white p-2 flex flex-col md:flex-row justify-between items-center top-0 left-0 fixed  w-full shadow-md z-50">
         <div className="flex">
-          <h5 className="flex mb-0"><FaUserDoctor style={{ marginRight: '5px' }} /> DocConnect</h5>
+          <h5 className="flex mb-0"><FaUserDoctor style={{ marginRight: '5px' }} /> HarvestHub</h5>
         </div>
         {user && (
           <div className="flex items-center justify-between space-x-4">
@@ -73,7 +73,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <button
               type="button"
               onClick={logoutUser}
-              className="bg-purple-700 font-semibold text-white px-3 py-1 rounded hidden md:block"
+              className="bg-green-700 font-semibold text-white px-3 py-1 rounded hidden md:block"
             >
               Logout
             </button>
@@ -82,7 +82,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </header>
       <div className="flex flex-1">
         <aside
-          className={`fixed md:relative bg-gradient-to-t from-purple-300 to-purple-700 text-white transform ${
+          className={`fixed md:relative bg-gradient-to-t from-green-300 to-green-700 text-white transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 transition-transform duration-300 ease-in-out`}
         >
@@ -105,7 +105,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             )}
             <button
               onClick={logoutUser}
-              className="bg-purple-900 text-white px-3 py-1 rounded md:hidden visible"
+              className="bg-green-900 text-white px-3 py-1 rounded md:hidden visible"
             >
               Logout
             </button>

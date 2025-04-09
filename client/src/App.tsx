@@ -15,24 +15,24 @@ function App() {
   interface RouteConfig {
     path: string;
     element: React.ReactNode;
-    role?: "patient" | "admin";
+    role?: "buyer" | "farmer";
   }
 
   const routes: RouteConfig[] = [
     { path: "/", element: <LoginForm /> },
     { path: "/register", element: <Register /> },
-    { path: "/dashboard", element: <Dashboard />, role: "admin" },
-    {path:"/book", element:<BookDoctorAppoint/>, role: "patient"},
-    { path: "/myappointments", element: <MyAppointments />, role: "patient" },
-    { path: "/appointlist", element: <Appointments />, role: "admin" },
-    { path: "/appointmentapproval", element: <Appointments />, role: "admin" },
-    { path: "/medical/:id", element: <MedicalRecordForm/>, role: "admin" },
-    { path: "/allPatient", element: <AllPatientList/>, role: "admin" }
+    { path: "/dashboard", element: <Dashboard />, role: "farmer" },
+    {path:"/book", element:<BookDoctorAppoint/>, role: "buyer"},
+    { path: "/myappointments", element: <MyAppointments />, role: "buyer" },
+    { path: "/appointlist", element: <Appointments />, role: "farmer" },
+    { path: "/appointmentapproval", element: <Appointments />, role: "farmer" },
+    { path: "/medical/:id", element: <MedicalRecordForm/>, role: "farmer" },
+    { path: "/allPatient", element: <AllPatientList/>, role: "farmer" }
 
   ];
 
   return (
-    <div className="bg-purple-200 min-h-screen">
+    <div className="bg-green-200 min-h-screen">
       <BrowserRouter>
         <Routes>
           {routes.map(({ path, element, role }) => (

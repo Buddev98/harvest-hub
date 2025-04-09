@@ -5,7 +5,7 @@ import { RootState } from "../redux/store";
 
 interface AuthguardProps {
   children: ReactNode;
-  role: "patient" | "admin";
+  role: "buyer" | "farmer";
 }
 
 const AuthGuard = ({ children, role }: AuthguardProps) => {

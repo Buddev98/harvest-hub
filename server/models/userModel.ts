@@ -6,24 +6,16 @@ interface User extends Document {
   role: string;
   email: string;
   phone: string;
-  age: string;
-  gender: string;
-  exerience: string;
-  specialization?: string;
-  MedicalHistory?: string[];
   refreshToken: string;
 }
 
 const userSchema: Schema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true},
-  role: { type: String, enum: ['admin', 'patient'], default: 'patient' },
+  role: { type: String, enum: ['farmer', 'buyer'], default: 'farmer' },
   email: { type: String, required: false, unique: true },
   phone: { type: String, required: true },
-  refreshToken: { type: String, default: '' },
-  gender: { type: String },
-  exerience: { type: String },
-  specialization: { type: String } 
+  refreshToken: { type: String, default: '' }
 }, { timestamps: true });
 
 

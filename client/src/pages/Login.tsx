@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { login } from "../redux/authSlice";
+import Form from "../components/Form";
 import { useToast } from "../hooks/useToast";
 import { AxiosError } from "axios";
-import { useLoader } from "../context/LoadingContext";
-import { FaUser } from "react-icons/fa";
-import { FaLock } from "react-icons/fa6";
-import Form from "../components/Form";
-import { IconType } from "react-icons";
+import Loader from "../components/Loader";
 
 const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { loading, showLoader, hideLoader } = useLoader();
-
+  const [loading, setLoading] = useState(true);
   const fields: {
     name: string;
     label: string;
@@ -24,16 +20,14 @@ const LoginForm: React.FC = () => {
     placeholder?: string;
     validation: (value: string) => string | null;
     options?: string[];
-    icon?: IconType
   }[] = [
     {
       name: "username",
       label: "Username",
       type: "text",
-      placeholder: "Enter your registered Username",
+      placeholder: "Enter your username",
       validation: (value: string) =>
         value.trim().length === 0 ? "Username is required." : null,
-      icon: FaUser
     },
     {
       name: "password",
@@ -46,25 +40,29 @@ const LoginForm: React.FC = () => {
           : value.length < 6
           ? "Password must be at least 6 characters long."
           : null,
-      icon: FaLock
     },
   ];
 
+  useEffect(() => {
+    document.title = "Harvest Hub - Login";
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [setLoading]);
+
   const handleSubmit = async (formData: Record<string, string>) => {
+    setLoading(true);
     try {
-      showLoader();
       const response = await api.post("/login", formData);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch(login(response.data));
-      console.log(response.data);
-      if (response.data.role === "patient") {
-        navigate("/book");
-      }
-      else if (response.data.role === "admin") {
+      if(response.data.role == "buyer"){
+        navigate("/products");
+      }else{
         navigate("/dashboard");
       }
+     
     } catch (error: unknown) {
-      hideLoader();
       if (error instanceof AxiosError) {
         showToast("error", error?.response?.data.message, {
           position: "top-center",
@@ -73,21 +71,24 @@ const LoginForm: React.FC = () => {
         console.log("Error Logging In:", error);
       }
     } finally {
-      hideLoader();
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    document.title = 'DocConnect - Login'
-  }, []);
-  
   return (
-      <Form
-      formLabel="Login"
-      fields={fields}
-      onSubmit={handleSubmit}
-      submitButtonLabel="Login now"
-      loading={loading} selectedRole={""} />
+    <div className="w-full md:w-[500px] mx-auto bg-gray-100 rounded">
+      {loading ? (
+        <Loader />
+      ) : (
+        <Form
+          formLabel="Login"
+          fields={fields}
+          onSubmit={handleSubmit}
+          submitButtonLabel="Login"
+          formWidth="400px"
+        />
+      )}
+    </div>
   );
 };
 
