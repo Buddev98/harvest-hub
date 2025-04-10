@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import api from "../api";
 import Table from '../components/Table';
 interface Booking {
@@ -31,6 +31,7 @@ const MyBookings: React.FC = () => {
         setBookings(response.data);
       } catch (err) {
         setError('Failed to fetch bookings');
+        console.log('Error getting booking:', err);
       } finally {
         setLoading(false);
       }
@@ -39,8 +40,7 @@ const MyBookings: React.FC = () => {
     fetchBookings();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+ 
 
   return (
     <div>

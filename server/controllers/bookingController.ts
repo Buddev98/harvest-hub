@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Product from "../models/ProductModel";
+
 import Booking from '../models/BookingModel';
 import mongoose from 'mongoose';
 import { JwtPayload } from 'jsonwebtoken';
@@ -28,14 +29,12 @@ const bookingController = {
         console.log("inside get booking user id", reqUserid)
 
         try {
-
-
-
-
             const bookings = await Booking.find({ buyerId: reqUserid })
             console.log(" booking list", bookings)
+            
             res.status(200).json(bookings);
         } catch (error) {
+            console.log('Error populating productId:', (error as Error).message);
             res.status(500).json({ error: 'Server error' });
         }
 
@@ -61,6 +60,16 @@ const bookingController = {
             });
 
             const createdBooking = await newBooking.save();
+
+            const update=await Product.findById(productId)
+            if(update){
+                const count=update?.quantity - quantityBooked;
+                console.log("update quantity",update?.quantity, "count value is",count)
+                update.quantity=count;
+                update.save();
+
+            }
+           
             res.status(201).json(createdBooking);
         } catch (error) {
             res.status(500).json({ error: 'Server error' });
