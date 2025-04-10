@@ -60,7 +60,7 @@ const LoginForm: React.FC = () => {
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch(login(response.data));
       if(response.data.role == "buyer"){
-        navigate("/addbookings");
+        navigate("/my-profile");
       }else{
         navigate("/FarmerDashboard");
       }

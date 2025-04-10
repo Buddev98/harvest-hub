@@ -9,6 +9,8 @@ import Register from "./pages/Register";
 import UserDetails from "./components/UserProfile";
 import AddProduct from "./pages/AddProduct";
 import FarmerDashboard from "./pages/Farmerdashboard";
+import MyBookings from "./pages/MyBookings";
+import AddBooking from "./pages/AddBooking";
 
 function App() {
   interface RouteConfig {
@@ -24,7 +26,9 @@ function App() {
     { path: "/profile", element: <UserDetails/>, role: "farmer" },
     { path: "/my-profile", element: <UserDetails/>, role: "buyer" },
     { path: "/addproduct", element: <AddProduct/>, role: "farmer" },
-    { path: "/FarmerDashboard", element: <FarmerDashboard/>, role: "farmer" }
+    { path: "/FarmerDashboard", element: <FarmerDashboard/>, role: "farmer" },
+    { path: "/mybookings", element: <MyBookings/>, role: "buyer" },
+    { path: "/addbookings", element: <AddBooking/>, role: "buyer" }
   ];
 
   return (

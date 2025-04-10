@@ -10,6 +10,20 @@ export default function AddProduct() {
  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+if (!form.name || !form.quantity || !form.pricePerKg || !form.category) {
+      alert("All fields are required");
+        return;
+      }
+      if (form.quantity <= 0) {
+        alert("Quantity must be greater than 0");
+        return;
+      }
+      if (form.pricePerKg <= 0) {
+        alert("Price per Kg must be greater than 0");
+        return;
+      }
+  
     try {
 await api.post("/product", form);
 console.log("santhu",form)
