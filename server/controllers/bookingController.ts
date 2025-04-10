@@ -29,8 +29,9 @@ const bookingController = {
         console.log("inside get booking user id", reqUserid)
 
         try {
-            const bookings = await Booking.find({ buyerId: reqUserid })
+            const bookings = await Booking.find({ buyerId: reqUserid }).populate('productId')
             console.log(" booking list", bookings)
+           
             
             res.status(200).json(bookings);
         } catch (error) {

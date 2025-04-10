@@ -20,15 +20,14 @@ interface Booking {
 const AddBooking: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState<number>(0);
   const { showToast } = useToast();
 
   const columns = [
-    { header: "Name", render: (product: Product) => product.name },
+    { header: "Product Name", render: (product: Product) => product.name },
 
-    { header: "PricePerKg", render: (product: Product) => product.pricePerKg },
+    { header: "Price Per Kg", render: (product: Product) => product.pricePerKg },
     { header: "Quantity", render: (product: Product) => product.quantity },
     { header: "category", render: (product: Product) => product.category },
 
@@ -50,7 +49,7 @@ const AddBooking: React.FC = () => {
       const response = await api.get('/product');
       setProducts(response.data);
     } catch (err) {
-      setError('Failed to fetch products');
+     
       console.log('Error getting products:', err);
     } finally {
       setLoading(false);
