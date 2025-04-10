@@ -2,9 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import api from "../api";
 import Table from '../components/Table';
+
+interface Product{
+  _id:string;
+  name: string;
+  imageUrl?: string;
+  quantity?: number;
+  pricePerKg: number;
+  category: string;
+  createdAt?: Date;
+}
 interface Booking {
   _id: string;
-  productId?: string
+  productId: Product;
     
   quantityBooked?: number;
   bookingDate?: string;
@@ -14,9 +24,11 @@ interface Booking {
 const MyBookings: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  
   const columns = [
-    { header: "product ID", render: (booking: Booking) => booking.productId },
+    
+    { header: "product Name", render: (booking: Booking) => booking.productId.name, },
+    { header: "Price per kG", render: (booking: Booking) => booking.productId.pricePerKg, },
     
     { header: "Quantity Booked", render: (booking: Booking) => booking.quantityBooked },
     { header: "Booking date", render: (booking: Booking) => booking.bookingDate },
@@ -30,7 +42,7 @@ const MyBookings: React.FC = () => {
         const response = await api.get('/mybookings');
         setBookings(response.data);
       } catch (err) {
-        setError('Failed to fetch bookings');
+       
         console.log('Error getting booking:', err);
       } finally {
         setLoading(false);
