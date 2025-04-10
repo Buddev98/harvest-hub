@@ -73,7 +73,7 @@ const UserDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
+    <div className="max-w-lg mx-auto mt-10">
       {isEditing ? (
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="mb-4">
@@ -86,7 +86,7 @@ const UserDetails: React.FC = () => {
               value={formData.username}
               onChange={handleChange}
               placeholder="Username"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
             />
             {errors.username && <p className="text-red-500 text-xs italic">{errors.username}</p>}
           </div>
@@ -100,7 +100,7 @@ const UserDetails: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
             />
             {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
           </div>
@@ -114,23 +114,32 @@ const UserDetails: React.FC = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Phone"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
             />
             {errors.phone && <p className="text-red-500 text-xs italic">{errors.phone}</p>}
           </div>
           <button
+            type='button'
             onClick={handleSubmit}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold me-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Submit
+          </button>
+          <button
+            type='button'
+            onClick={() => setIsEditing(false)}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Cancel
           </button>
         </div>
       ) : (
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-700 text-lg font-bold mb-2">Username: {user?.username}</p>
-          <p className="text-gray-700 text-lg font-bold mb-2">Email: {user?.email}</p>
-          <p className="text-gray-700 text-lg font-bold mb-2">Phone: {user?.phone}</p>
+          <p className="text-gray-700 text-lg font-bold mb-2">Username: <span className='font-semibold'>{user?.username}</span></p>
+          <p className="text-gray-700 text-lg font-bold mb-2">Email: <span className='font-semibold'>{user?.email}</span></p>
+          <p className="text-gray-700 text-lg font-bold mb-2">Phone: <span className='font-semibold'>{user?.phone}</span></p>
           <button
+            type='button'
             onClick={() => setIsEditing(true)}
             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
