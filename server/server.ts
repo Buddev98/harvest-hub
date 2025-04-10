@@ -33,7 +33,6 @@ logger.info('MongoDB connected successfully');
 app.use(authRouter);
 app.use(userRouter);
 app.use(productRouter);
-app.use(bookingRouter);
-
+app.use(bookingRouter)
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
