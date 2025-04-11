@@ -7,7 +7,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://harvest-hub-9s2d.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },
