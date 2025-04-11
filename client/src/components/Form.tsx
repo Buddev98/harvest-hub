@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { MdLogin } from "react-icons/md";
@@ -19,13 +19,12 @@ interface FormProps {
   submitButtonLabel?: string;
   formLabel: string;
   formWidth: string;
-  element?: ReactNode;
-  checked?: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonLabel = "Submit", formLabel = 'Login', formWidth = '400px', element, checked = false }) => {
+const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonLabel = "Submit", formLabel = 'Login', formWidth = '400px' }) => {
   const formDataRef = useRef<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string | null>>({});
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -62,8 +61,11 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonLabel = "Subm
     }
   };
 
-  const hasErrors = Object.values(errors).some((error) => error !== null);
-  const hasValues = Object.values(formDataRef.current).some((val) => val !== undefined && val !== "");
+  useEffect(() => {
+    const hasErrors = Object.values(errors).some((error) => error !== null);
+    const allFieldsFilled = fields.every((field) => formDataRef.current[field.name] && formDataRef.current[field.name] !== "");
+    setIsButtonDisabled(hasErrors || !allFieldsFilled);
+  }, [errors, fields]);
 
   return (
     <form
@@ -127,11 +129,10 @@ const Form: React.FC<FormProps> = ({ fields, onSubmit, submitButtonLabel = "Subm
           )}
         </div>
       ))}
-      {element ? element : null}
       <button
         type="submit"
-        className={`w-full rounded p-2 flex items-center justify-center ${(element ? !checked : (hasErrors || !hasValues)) ? 'bg-gray-200 text-gray cursor-not-allowed ' : 'bg-blue-500 text-white hover:bg-blue-600' } transition`}
-        disabled={(element ? !checked : (hasErrors || !hasValues))}
+        className={`w-full rounded p-2 flex items-center justify-center ${isButtonDisabled ? 'bg-gray-200 text-gray cursor-not-allowed ' : 'bg-blue-500 text-white hover:bg-blue-600' } transition`}
+        disabled={isButtonDisabled}
       >
         <MdLogin style={{ marginRight: "10px "}} />
         {submitButtonLabel}
